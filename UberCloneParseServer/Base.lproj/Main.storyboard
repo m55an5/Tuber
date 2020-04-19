@@ -136,6 +136,7 @@
                         <outlet property="signupSwitchButton" destination="cad-QK-bx4" id="W7m-Vo-zZR"/>
                         <outlet property="usernameTextField" destination="7Oa-hV-MnH" id="Npo-fr-zs7"/>
                         <segue destination="u2e-OQ-is1" kind="presentation" identifier="showRiderViewController" modalPresentationStyle="fullScreen" id="0sH-lQ-Wua"/>
+                        <segue destination="iHb-d9-MSm" kind="presentation" identifier="showDriverViewController" modalPresentationStyle="fullScreen" id="HCg-QZ-j3L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -169,9 +170,12 @@
                                 </constraints>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5F-hF-wCO">
-                                <rect key="frame" x="90" y="546" width="194" height="39"/>
+                                <rect key="frame" x="0.0" y="546" width="375" height="79"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="h5F-hF-wCO" secondAttribute="height" multiplier="375:79" id="Qmn-z6-nDN"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <state key="normal" title="call a Tuber"/>
+                                <state key="normal" title="Call a Tuber"/>
                                 <connections>
                                     <action selector="callATuber:" destination="u2e-OQ-is1" eventType="touchUpInside" id="VsS-6J-Pc2"/>
                                 </connections>
@@ -179,14 +183,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="h5F-hF-wCO" firstAttribute="top" secondItem="8p9-oB-KhH" secondAttribute="bottom" constant="28" id="1a4-Ho-b4i"/>
                             <constraint firstItem="c80-ff-ZlH" firstAttribute="top" secondItem="dPM-S9-9eQ" secondAttribute="top" id="EZL-zY-bNv"/>
                             <constraint firstItem="8p9-oB-KhH" firstAttribute="top" secondItem="c80-ff-ZlH" secondAttribute="bottom" id="Eh8-f2-4Ih"/>
-                            <constraint firstItem="h5F-hF-wCO" firstAttribute="leading" secondItem="dPM-S9-9eQ" secondAttribute="leading" constant="90" id="EuJ-da-zNn"/>
+                            <constraint firstItem="h5F-hF-wCO" firstAttribute="leading" secondItem="dPM-S9-9eQ" secondAttribute="leading" id="GQD-dh-lr9"/>
                             <constraint firstItem="c80-ff-ZlH" firstAttribute="leading" secondItem="dPM-S9-9eQ" secondAttribute="leading" id="Jz5-kA-6Rq"/>
                             <constraint firstItem="8p9-oB-KhH" firstAttribute="trailing" secondItem="dPM-S9-9eQ" secondAttribute="trailing" id="PqE-sH-mvu"/>
-                            <constraint firstItem="dPM-S9-9eQ" firstAttribute="trailing" secondItem="h5F-hF-wCO" secondAttribute="trailing" constant="91" id="QVE-cR-25S"/>
                             <constraint firstItem="8p9-oB-KhH" firstAttribute="leading" secondItem="dPM-S9-9eQ" secondAttribute="leading" id="VcM-j8-jxk"/>
+                            <constraint firstItem="h5F-hF-wCO" firstAttribute="top" secondItem="8p9-oB-KhH" secondAttribute="bottom" constant="28" id="nAO-zK-8f3"/>
+                            <constraint firstItem="h5F-hF-wCO" firstAttribute="trailing" secondItem="dPM-S9-9eQ" secondAttribute="trailing" id="rUC-Tb-IvY"/>
                             <constraint firstItem="c80-ff-ZlH" firstAttribute="trailing" secondItem="dPM-S9-9eQ" secondAttribute="trailing" id="xLh-s6-SVa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dPM-S9-9eQ"/>
@@ -199,7 +203,108 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wtP-QJ-tMj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047.2" y="87.192118226600982"/>
+            <point key="canvasLocation" x="1420" y="-545.32019704433503"/>
+        </scene>
+        <!--Request List-->
+        <scene sceneID="WN8-Jd-EaR">
+            <objects>
+                <tableViewController id="wML-xH-DQS" customClass="DriverViewController" customModule="UberCloneParseServer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5Bd-ph-JtY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="D9Z-Ow-7Tl">
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D9Z-Ow-7Tl" id="XdH-Ze-WHZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="zJW-FS-cTg" kind="show" identifier="showRiderLocationViewCtrl" id="jdn-U3-dCN"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wML-xH-DQS" id="XSc-I4-Tkf"/>
+                            <outlet property="delegate" destination="wML-xH-DQS" id="AIz-Mo-iml"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Request List" id="Dfk-Bh-i1b">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="v4v-yv-q8z">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="presentation" identifier="driverLogoutSegue" modalPresentationStyle="fullScreen" id="fMW-tm-6Nk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aRw-YU-uER" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2220" y="277"/>
+        </scene>
+        <!--Rider Request Location View Controller-->
+        <scene sceneID="yb1-mu-FcN">
+            <objects>
+                <viewController id="zJW-FS-cTg" customClass="RiderRequestLocationViewController" customModule="UberCloneParseServer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5GH-PQ-7hq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9TY-HG-ubE">
+                                <rect key="frame" x="0.0" y="88" width="375" height="421"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9TY-HG-ubE" secondAttribute="height" multiplier="375:421" id="Tt4-r8-DEa"/>
+                                </constraints>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qM-WA-GHn">
+                                <rect key="frame" x="93" y="557" width="189" height="30"/>
+                                <state key="normal" title="Accept Request"/>
+                                <connections>
+                                    <action selector="acceptRequestPressed:" destination="zJW-FS-cTg" eventType="touchUpInside" id="42u-me-eMV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="8qM-WA-GHn" firstAttribute="leading" secondItem="gPg-t6-WeE" secondAttribute="leading" constant="93" id="Fhk-oD-pOA"/>
+                            <constraint firstItem="9TY-HG-ubE" firstAttribute="top" secondItem="gPg-t6-WeE" secondAttribute="top" id="LRd-Wo-8zO"/>
+                            <constraint firstItem="8qM-WA-GHn" firstAttribute="top" secondItem="9TY-HG-ubE" secondAttribute="bottom" constant="48" id="PNo-aN-hIh"/>
+                            <constraint firstItem="gPg-t6-WeE" firstAttribute="trailing" secondItem="8qM-WA-GHn" secondAttribute="trailing" constant="93" id="RkV-f5-FfR"/>
+                            <constraint firstItem="9TY-HG-ubE" firstAttribute="trailing" secondItem="gPg-t6-WeE" secondAttribute="trailing" id="Xlo-H6-Rpc"/>
+                            <constraint firstItem="9TY-HG-ubE" firstAttribute="leading" secondItem="gPg-t6-WeE" secondAttribute="leading" id="sa2-JO-NQZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gPg-t6-WeE"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Fk7-Oc-KpK"/>
+                    <connections>
+                        <outlet property="acceptRequest" destination="8qM-WA-GHn" id="cox-zt-W31"/>
+                        <outlet property="map" destination="9TY-HG-ubE" id="NK9-VR-I2x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8hi-YF-ERC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3068" y="271.92118226600985"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Fre-7Y-C3n">
+            <objects>
+                <navigationController id="iHb-d9-MSm" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="eBT-X9-w1p"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9cl-ZS-n0r">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wML-xH-DQS" kind="relationship" relationship="rootViewController" id="zMC-Tz-ZhP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ysh-w4-gu7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1420" y="263"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ngc-YN-y1s"/>
+    </inferredMetricsTieBreakers>
 </document>

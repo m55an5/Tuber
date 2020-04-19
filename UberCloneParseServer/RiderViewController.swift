@@ -99,7 +99,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         
         query.findObjectsInBackground {
             (objects, error) in
-            if objects!.count > 0 {
+            if objects != nil { // or search for stopupdatinglocation
                 self.riderRequestActive = true
                 self.callATuberButton.isEnabled = true
                 self.callATuberButton.setTitle("Cancel Uber", for: [])
@@ -116,6 +116,8 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "logoutSegue" {
+            
+            manager.stopUpdatingLocation() //stop updatinglocation
             PFUser.logOut()
             
         }
@@ -166,6 +168,64 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
             
         }
         
+        if riderRequestActive == true {
+           
+            let query = PFQuery(className: "RiderRequest")
+            //driverResponded
+            let thisUser = PFUser.current()?.username
+            
+            query.whereKey("userName", equalTo: thisUser!)
+            
+            query.findObjectsInBackground {
+                (objects, error) in
+                if let riderRequests = objects {
+                    
+                    for riderRequest in riderRequests {
+                        
+                        if let driverUserName = riderRequest["driverResponded"] {
+                            
+                            let newQuery = PFQuery(className: "DriverLocation")
+                            
+                            newQuery.whereKey("username", equalTo: driverUserName)
+            
+                            newQuery.findObjectsInBackground {
+                                (objectts, error) in
+                                if let driverLocations = objectts {
+                                    
+                                    for tmpDriverLocationObj in driverLocations {
+                                        
+                                        
+                                        if let tmpDriverLocation = tmpDriverLocationObj["location"] as? PFGeoPoint {
+                                            
+                                            let tmpDriverCLLocation = CLLocation(latitude: tmpDriverLocation.latitude, longitude: tmpDriverLocation.longitude)
+                                            
+                                            let tmpRiderCLLocation = CLLocation(latitude: self.userLocation!.latitude, longitude: self.userLocation!.longitude)
+                                            
+                                            let distance = tmpRiderCLLocation.distance(from: tmpDriverCLLocation) / 1000
+                                            
+                                            let roundDistance = round(distance * 100) / 100
+                                            
+                                            self.callATuberButton.setTitle("Driver is \(roundDistance) away", for: [])
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                if error != nil {
+                    print(error!)
+                }
+                
+            }
+            
+        }
         
     }
 

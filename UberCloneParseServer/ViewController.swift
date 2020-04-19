@@ -50,6 +50,7 @@ class ViewController: UIViewController {
                         if let isDriver = PFUser.current()?["isDriver"] as? Bool {
                             
                             if isDriver {
+                                self.performSegue(withIdentifier: "showDriverViewController", sender: self)
                                 
                             }else{
                                 self.performSegue(withIdentifier: "showRiderViewController", sender: self)
@@ -72,7 +73,7 @@ class ViewController: UIViewController {
                         if let isDriver = PFUser.current()?["isDriver"] as? Bool {
                             
                             if isDriver {
-                                
+                                self.performSegue(withIdentifier: "showDriverViewController", sender: self)
                             }else{
                                 self.performSegue(withIdentifier: "showRiderViewController", sender: nil)
                             }
@@ -124,7 +125,7 @@ class ViewController: UIViewController {
             if let isDriver = PFUser.current()?["isDriver"] as? Bool {
                 
                 if isDriver {
-                    
+                    self.performSegue(withIdentifier: "showDriverViewController", sender: self)
                 }else{
                     self.performSegue(withIdentifier: "showRiderViewController", sender: self)
                 }
