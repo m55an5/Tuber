@@ -1,0 +1,6 @@
+framework module Pods_UberCloneParseServer {
+  umbrella header "Pods-UberCloneParseServer-umbrella.h"
+
+  export *
+  module * { export * }
+}
