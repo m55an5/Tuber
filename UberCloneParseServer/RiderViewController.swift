@@ -18,6 +18,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     var riderRequestActive = true
     
+    var driverOnTheWay = false
     
     @IBOutlet weak var map: MKMapView!
     
@@ -129,20 +130,23 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         
             userLocation = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            if driverOnTheWay == false {
             
-            let region = MKCoordinateRegion(center: userLocation!, span: span)
-            
-            self.map.setRegion(region, animated: true)
-            
-            self.map.removeAnnotations(self.map.annotations)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = userLocation!
-            annotation.title = title
-            
-            self.map.addAnnotation(annotation)
-            
+                let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                
+                let region = MKCoordinateRegion(center: userLocation!, span: span)
+                
+                self.map.setRegion(region, animated: true)
+                
+                self.map.removeAnnotations(self.map.annotations)
+                
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = userLocation!
+                annotation.title = title
+                
+                self.map.addAnnotation(annotation)
+                
+            }
             if PFUser.current() != nil {
                 
                 let query = PFQuery(className: "RiderRequest")
@@ -197,6 +201,8 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                                         
                                         if let tmpDriverLocation = tmpDriverLocationObj["location"] as? PFGeoPoint {
                                             
+                                            self.driverOnTheWay = true
+                                            
                                             let tmpDriverCLLocation = CLLocation(latitude: tmpDriverLocation.latitude, longitude: tmpDriverLocation.longitude)
                                             
                                             let tmpRiderCLLocation = CLLocation(latitude: self.userLocation!.latitude, longitude: self.userLocation!.longitude)
@@ -207,6 +213,26 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                                             
                                             self.callATuberButton.setTitle("Driver is \(roundDistance) away", for: [])
                                             
+                                            let latDelta = abs(tmpDriverLocation.latitude - self.userLocation!.latitude) * 2 + 0.005
+                                            let lonDelta = abs(tmpDriverLocation.longitude - self.userLocation!.longitude) * 2 + 0.005
+                                            
+                                            let region = MKCoordinateRegion(center: self.userLocation!, span: MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta))
+                                            
+                                            self.map.removeAnnotations(self.map.annotations)
+                                            
+                                            self.map.setRegion(region, animated: true)
+                                            
+                                            let userLocationAnno = MKPointAnnotation()
+                                            userLocationAnno.coordinate = self.userLocation!
+                                            userLocationAnno.title = "Your Location"
+                                            
+                                            self.map.addAnnotation(userLocationAnno)
+                                            
+                                            let driveLocationAnno = MKPointAnnotation()
+                                            driveLocationAnno.coordinate = CLLocationCoordinate2D(latitude: tmpDriverLocation.latitude, longitude: tmpDriverLocation.longitude)
+                                            driveLocationAnno.title = "Driver Location"
+                                            
+                                            self.map.addAnnotation(driveLocationAnno)
                                         }
                                         
                                     }
